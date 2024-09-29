@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load chunks %}
+
 {% block banner %}
 {% include 'product_banner.html' %}
 {% endblock banner %}
@@ -16,26 +18,27 @@
                 <option>Sort By Sale</option>
             </select>
         </div>
+{#            {% calc_discount_price p.product_price p.discount_rate %}#}
         <div class="row">
+            {% for product in all_products %}
             <div class="col-4">
-                <a href="{% url 'product_details' %}"><img src="{% static 'images/product-1.jpg' %}"></a>
-                <h4>Red Printed T-Shirt</h4>
-                <div class="rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-o"></i>
-                </div>
-                <p>$50.00</p>
+                <a href="{% url 'product_details' product.id %}"><img src="media/{{product.cover_image}}"></a>
+                <h3>{{ product.title }}</h3>
+                <p>{{ product.description }}</p>
+                <h2>Rs. {{ product.price }}</h2>
             </div>
+                {% endfor %}
         </div>
         <div class="page-btn">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#8594;</span>
+            {% if all_products.has_previous %}
+                <a href="?page={{ all_products.previous_page_number }}"><span><<<</span></a>
+            {% endif %}
+            {% for i in all_products.paginator.page_range %}
+                <a href="?page={{ i }}"><span>{{ i }}</span></a>
+            {% endfor %}
+            {% if all_products.has_next %}
+                <a href="?page={{ all_products.next_page_number }}"><span>>>></span></a>
+            {% endif %}
         </div>
     </div>
 {% endblock content %}
