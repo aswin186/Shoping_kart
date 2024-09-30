@@ -1,21 +1,23 @@
+{% load discount_calc %}
 {% load static %}
+
 <!-- Feadtued Categories -->
 
-    <div class="categories">
-        <div class="small-container">
-            <div class="row">
-                <div class="col-3">
-                    <img src="{% static 'images/category-1.jpg' %}">
-                </div>
-                <div class="col-3">
-                    <img src="{% static 'images/category-2.jpg' %}">
-                </div>
-                <div class="col-3">
-                    <img src="{% static 'images/category-3.jpg' %}">
-                </div>
-            </div>
-        </div>
-    </div>
+{#    <div class="categories">#}
+{#        <div class="small-container">#}
+{#            <div class="row">#}
+{#                <div class="col-3">#}
+{#                    <img src="{% static 'images/category-1.jpg' %}">#}
+{#                </div>#}
+{#                <div class="col-3">#}
+{#                    <img src="{% static 'images/category-2.jpg' %}">#}
+{#                </div>#}
+{#                <div class="col-3">#}
+{#                    <img src="{% static 'images/category-3.jpg' %}">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 
     <!-- Featured Products -->
     
@@ -24,9 +26,10 @@
         <div class="row">
             {% for fp in featured_products %}
             <div class="col-4">
-                <a href="{% url 'product_details' fp.id %}"><img src="media/{{fp.cover_image}}"></a>
-                <h4>{{ fp.title }}</h4>
-                <h3>Rs. {{ fp.price }}</h3>
+                <a href="{% url 'product_details' fp.id %}"><img style="height: 300px;" src="media/{{fp.cover_image}}"></a>
+                <h3>{{ fp.title }}</h3>
+                <del>Rs. {{ fp.price }}</del>
+                <h3>Rs. {% calc_discount fp.price fp.discount %}</h3>
             </div>
             {% endfor %}
         </div>
@@ -34,9 +37,10 @@
         <div class="row">
             {% for lp in latest_products %}
             <div class="col-4">
-                <a href="{% url 'product_details' lp.id %}"><img src="media/{{lp.cover_image}}"></a>
-                <h4>{{ lp.title }}</h4>
-                <h3>Rs. {{ lp.price }}</h3>
+                <a href="{% url 'product_details' lp.id %}"><img style="height: 300px;" src="media/{{lp.cover_image}}"></a>
+                <h3>{{ lp.title }}</h3>
+                <del>Rs. {{ lp.price }}</del>
+                <h3>Rs. {% calc_discount lp.price lp.discount %}</h3>
             </div>
             {% endfor %}
         </div>

@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block banner %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <p style="color: green; align-content: center">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% include 'home_banner.html' %}
 {% endblock banner %}
 

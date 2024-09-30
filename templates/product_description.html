@@ -1,3 +1,5 @@
+{% load discount_calc %}
+
 <div class="small-container single-product">
         <div class="row">
             <div class="col-2">
@@ -6,7 +8,8 @@
             <div class="col-2">
                 <h1>{{ product.title }}</h1>
                 <h4>{{ product.description }}</h4>
-                <h2>Rs. {{ product.price }}</h2>
+                <del>Rs. {{ product.price }}</del>
+                <h3>Rs. {% calc_discount product.price product.discount %}</h3>
                 <select>
                     <option>Select Size</option>
                     <option>XXL</option>

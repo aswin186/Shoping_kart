@@ -4,6 +4,20 @@
     box-sizing: border-box;
 }
 
+/*passwordconformation*/
+.error {
+    color: red;
+    display: block;
+    font-size: xx-small;
+}
+
+.success {
+    color: green;
+    display: none;
+    font-size: xx-small;
+}
+
+
 body{
     font-family: 'Poppins', sans-serif;
 }
@@ -411,7 +425,7 @@ th:last-child{
     max-width: 300px;
     padding: 0 20px;
     position: absolute;
-    top: 130px;
+    top: 90px;
     transition: transform 1s;
 }
 form input{

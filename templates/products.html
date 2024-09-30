@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load chunks %}
+{% load discount_calc %}
 
 {% block banner %}
 {% include 'product_banner.html' %}
@@ -22,10 +22,11 @@
         <div class="row">
             {% for product in all_products %}
             <div class="col-4">
-                <a href="{% url 'product_details' product.id %}"><img src="media/{{product.cover_image}}"></a>
+                <a href="{% url 'product_details' product.id %}"><img style="height: 300px;" src="media/{{product.cover_image}}"></a>
                 <h3>{{ product.title }}</h3>
                 <p>{{ product.description }}</p>
-                <h2>Rs. {{ product.price }}</h2>
+                <del>Rs. {{ product.price }}</del>
+                <h3>Rs. {% calc_discount product.price product.discount %}</h3>
             </div>
                 {% endfor %}
         </div>

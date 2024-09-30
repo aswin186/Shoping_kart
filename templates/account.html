@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
     {% load static %}
     <div class="account-page">
@@ -12,22 +11,34 @@
                 <div class="col-2">
                     <div class="form-container">
                         <div class="form-btn">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'error' %}
+                                        <p style="color: red">{{ message }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                             <span onclick="login()">Login</span>
                             <span onclick="register()">Register</span>
                             <hr id="Indicator">
                         </div>
-                        <form id="LoginForm">
-                            <input type="text" placeholder="Username">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn">Login</button>
+                        <form id="LoginForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" name="username" minlength="6" maxlength="10" required placeholder="Username">
+                            <input type="password" id="password" name="password" minlength="8" maxlength="12" required placeholder="Password">
+                            <button type="submit" name="login" class="btn">Login</button>
                             <a href="">Forget Password</a>
                         </form>
 
-                        <form id="RegForm">
-                            <input type="text" placeholder="Username">
-                            <input type="email" placeholder="Email">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn">Register</button>
+                        <form id="RegForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" name="username" minlength="6" maxlength="10" required placeholder="Username">
+                            <input type="email" name="email" required placeholder="Email">
+                            <input type="password" id="password" name="password" minlength="8" maxlength="12" required placeholder="Password">
+                            <input type="password" id="confirmPassword" name="confirmPassword" minlength="8" maxlength="12" required placeholder="Confirm Password">
+                            <p style="display: none; color: red; font-size: small;" id="error" class="error">Password not match</p>
+                            <p style="display: none; color: green; font-size: small;" id="success" class="success">Match</p>
+                            <button type="submit" style="display: none" name="register" id="registerButton" class="btn">Register</button>
                         </form>
                     </div>
                 </div>
@@ -39,4 +50,14 @@
 
 {% block scriptContent %}
     <script src="{%  static 'js/toggle_form.js' %}"></script>
+    <script src="{%  static 'js/password_conformation.js' %}"></script>
+    {% if register %}
+        <script>
+            register()
+        </script>
+    {% else %}
+        <script>
+            login()
+        </script>
+    {% endif %}
 {% endblock scriptContent %}
