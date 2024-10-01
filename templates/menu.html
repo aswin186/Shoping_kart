@@ -9,7 +9,7 @@
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'list_products' %}">All Products</a></li>
             {% if user.is_authenticated %}   
-                <li><a href="">Orders</a></li>
+                <li><a href="{% url 'track_orders' %}">Orders</a></li>
             {% endif %}
             {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">LogOut</a></li>

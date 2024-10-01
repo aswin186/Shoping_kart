@@ -1,0 +1,27 @@
+{% load get_status %}
+
+{% if all_orders %}
+    <div class="small-container cart-page">
+        <table>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+            {% for order in all_orders %}
+            <tr>
+                <td> <p>{{ order.id }}</p> </td>
+                <td>{{ order.created_at }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>{% get_order_status order.order_stage %}</td>
+                <td><a class="btn" href="{% url 'index' %}">View</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% else %}
+    <h1>No orders</h1>
+{% endif %}
+

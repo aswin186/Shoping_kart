@@ -5,8 +5,17 @@
     {% include 'cart_banner.html' %}
 {% endblock banner %}
 
-{% block content %}     
-    {% include 'cart_content.html' %}
+{% block content %}    
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <p style="color: green; align-content: center">{{ message }}</p>
+                <a class="btn" href="{% url 'track_orders' %}">Track Order</a>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% include 'cart_content.html' %}
+    {% endif %}
 {% endblock content %}
 
 {% block scriptContent %}

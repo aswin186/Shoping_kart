@@ -1,74 +1,63 @@
-<div class="small-container cart-page">
+{% load discount_calc %}
+{% load item_sub_total %}
+{% load order_total %}
+
+{% if cart_obj and cart_obj.added_items.all %}
+    <div class="small-container cart-page">
         <table>
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
             </tr>
+            {% for item in cart_obj.added_items.all %}
             <tr>
                 <td>
                     <div class="cart-info">
-                        <img src="images/buy-1.jpg">
+                        <img src="{{ item.product.cover_image.url }}">
                         <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
+                            <p>{{ item.product.title }}</p>
+                            <small>Rs. {% calc_discount item.product.price item.product.discount %}</small>
+                            
                             <br>
-                            <a href="">Remove</a>
+                            <a href="{% url 'remove_from_cart' item.id %}">Remove</a>
                         </div>
                     </div>
                 </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
+                <td>{{ item.quantity }}</td>
+                <td>Rs. {% calc_subTotal  item.quantity item.product.price item.product.discount %}</td>
             </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/buy-2.jpg">
-                        <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/buy-3.jpg">
-                        <div>
-                            <p>Red Printed T-Shirt</p>
-                            <small>Price: $50.00</small>
-                            <br>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>$50.00</td>
-            </tr>
+            {% endfor %}
         </table>
         <div class="total-price">
             <table>
-                <tr>
-                    <td>Subtotal</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Tax</td>
-                    <td>$35.00</td>
-                </tr>
+{#                <tr>#}
+{#                    <td>Subtotal</td>#}
+{#                    <td>$200.00</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <td>Tax</td>#}
+{#                    <td>$200.00</td>#}
+{#                </tr>#}
                 <tr>
                     <td>Total</td>
-                    <td>$230.00</td>
+                    <td>Rs. {% calc_Total cart_obj %}</td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><button>Conform order</button></td>
+                    <form method="post" action="{% url 'conform_order' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="total" value="{% calc_Total cart_obj %}">
+                        <td><button type="submit" class="btn">Conform order</button></td>    
+                    </form>
                 </tr>
             </table>
         </div>
     </div>
+    
+{% else %}
+    <div class="col-2">
+        <h2>You Cart is Empty!.............</h2>
+        <a href="{% url 'list_products' %}"  class="btn">Feed Your Cart</a>
+    </div>
+{% endif %}

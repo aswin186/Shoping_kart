@@ -15,15 +15,19 @@ class Order(models.Model):
     order_processing = 2
     order_delivered = 3
     order_rejected = -1
-    order_status = ((order_processing, 'order_processing'),
+    order_status = ((order_confirmed, 'order_confirmed'),(order_processing, 'order_processing'),
                     (order_delivered, 'order_delivered'),
                     (order_rejected, 'order_rejected'))
+
     order_stage = models.IntegerField(choices=order_status, default=cart_stage)
     user = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, related_name='carts', null=True)
-
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     cart_status = models.IntegerField(choices=status, default=live)
+
+    def __str__(self):
+        return str(self.id) + " <-----> " + self.user.name + " <------> " + str(self.order_stage)
 
 
 class OrderItem(models.Model):
