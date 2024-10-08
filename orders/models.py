@@ -27,10 +27,11 @@ class Order(models.Model):
     cart_status = models.IntegerField(choices=status, default=live)
 
     def __str__(self):
-        return str(self.id) + " <-----> " + self.user.name + " <------> " + str(self.order_stage)
+        return str(self.id)
 
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name='cart_items')
     quantity = models.IntegerField(default=1)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     owner = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='added_items')

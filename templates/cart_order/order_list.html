@@ -1,0 +1,60 @@
+{% extends 'main/base.html' %}
+{% load get_status %}
+{% load item_price %}
+
+
+{% block content %}
+    Order ID :- ODR000{{ order_obj.id }}
+    <br>
+    Ordered Date :- {{ order_obj.created_at | date:'d M Y' }}
+    <br>
+    Total Price :- {{ order_obj.total_price }}
+    <br>
+    Order Status :- {% get_order_status order_obj.order_stage %}
+    <br>
+
+
+    <div class="small-container cart-page">
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </tr>
+            {% for item in order_obj.added_items.all %}
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img src="{{ item.product.cover_image.url }}" alt="Product image">
+                        <div>
+                            <br>
+                            <p>{{ item.product.title }}</p>
+                            <small>Rs. {% calc_price item.quantity item.price %}</small>
+                        </div>
+                    </div>
+                </td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Total</td>
+                    <td>{{ order_obj.total_price }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <form method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="total" value="cancel">
+                        <td><button type="submit" class="btn">Cancel order</button></td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock content %}

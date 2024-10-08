@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    {% load static %}
+    {% if user.is_authenticated %}
+        {% include 'accounts/user_profile.html' %}
+    {% else %}
+        {% include 'accounts/signin_signup.html' %}
+    {% endif %}
+{% endblock content %}
+
+{% block scriptContent %}
+    <script src="{%  static 'js/toggle_form.js' %}"></script>
+    <script src="{%  static 'js/password_conformation.js' %}"></script>
+    <script src="{%  static 'js/profile_scripts.js' %}"></script>
+    {% if register %}
+        <script>
+            register()
+        </script>
+    {% else %}
+        <script>
+            login()
+        </script>
+    {% endif %}
+{% endblock scriptContent %}

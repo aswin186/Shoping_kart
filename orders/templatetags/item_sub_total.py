@@ -6,5 +6,5 @@ register = template.Library()
 @register.simple_tag()
 def calc_subTotal(quantity, price, discount):
     dis_price = price - (price * discount)/100
-    sub_total = quantity * dis_price
+    sub_total = int(quantity) * dis_price
     return float(math.floor(sub_total))

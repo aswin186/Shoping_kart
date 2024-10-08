@@ -1,37 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RedStore | Ecommerce Website Design</title>
-    <link rel="stylesheet" href="{%  static 'css/style.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body>
-    <div class="header">
-        <div class="container">
-        
-            {% include 'menu.html' %}
-        
-            {% block banner %}
-               <h1>banner block</h1>
-            {% endblock banner %}
-        </div>
-    </div>
-    
-    {% block content %}
-        <h1>body content</h1>
-    {% endblock content %}
-    
-    
-    <!-- Footer -->
-    <div class="footer">
-        <div class="container">
+<div class="container">
             <div class="row">
                 <div class="footer-col-1">
                     <h3>Download Our App</h3>
@@ -66,16 +34,5 @@
                 </div>
             </div>
             <hr>
-            <p class="copyright">Copyright 2020 - Samwit Adhikary</p>
+            <p class="copyright">Copyright 2024 - Aswin</p>
         </div>
-    </div>
-
-    <!-- javascript -->
-    <script src="{%  static 'js/menu_item.js' %}"></script>
-    {% block scriptContent %}
-        <h1>scripts</h1>
-    {% endblock scriptContent %}
-
-</body>
-
-</html>

@@ -26,7 +26,7 @@
         <div class="row">
             {% for fp in featured_products %}
             <div class="col-4">
-                <a href="{% url 'product_details' fp.id %}"><img style="height: 300px;" src="media/{{fp.cover_image}}"></a>
+                <a href="{% url 'product_details' fp.id %}"><img style="height: 300px;" src="{{fp.cover_image.url}}"></a>
                 <h3>{{ fp.title }}</h3>
                 <del>Rs. {{ fp.price }}</del>
                 <h3>Rs. {% calc_discount fp.price fp.discount %}</h3>
@@ -37,7 +37,7 @@
         <div class="row">
             {% for lp in latest_products %}
             <div class="col-4">
-                <a href="{% url 'product_details' lp.id %}"><img style="height: 300px;" src="media/{{lp.cover_image}}"></a>
+                <a href="{% url 'product_details' lp.id %}"><img style="height: 300px;" src="{{lp.cover_image.url}}"></a>
                 <h3>{{ lp.title }}</h3>
                 <del>Rs. {{ lp.price }}</del>
                 <h3>Rs. {% calc_discount lp.price lp.discount %}</h3>
@@ -58,7 +58,7 @@
                     <h1>Smart Band 4</h1>
                     <small>The Mi Smart Band 4 fearures a 39.9%larger (than Mi Band 3) AMOLED color full-touch display
                         with adjustable brightness, so everything is clear as can be.<br></small>
-                    <a href="products.html" class="btn">Buy Now &#8594;</a>
+                    <a href="{% url 'list_products' %}" class="btn">Buy Now &#8594;</a>
                 </div>
             </div>
         </div>

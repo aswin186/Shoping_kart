@@ -513,3 +513,96 @@ form a{
         display: none;
     }
 }
+
+
+
+
+/*new css for managing profile view*/
+
+
+/*.container {*/
+/*    width: 400px;*/
+/*    margin: 50px auto;*/
+/*    background: #fff;*/
+/*    padding: 20px;*/
+/*    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+/*    border-radius: 10px;*/
+/*}*/
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+h2, h3 {
+    margin: 0;
+    color: #333;
+}
+
+.profile-card, .address-card {
+    width: 700px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    /*margin-bottom: 40px;*/
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logout-card {
+    align-content: end;
+    width: 700px;
+    margin: 50px auto;
+}
+
+.profile-card:hover, .address-card:hover {
+    transform: translateY(-5px);
+}
+
+.profile-card h3, .address-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+input {
+    width: 60%;
+    padding: 100px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px 5px 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#verifyPhone button {
+    background-color: #FF9800;
+    margin-top: 10px;
+}
+
+#verifyPhone button:hover {
+    background-color: #e68900;
+}
+

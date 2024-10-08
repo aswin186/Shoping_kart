@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'main/base.html' %}
 
 {% block banner %}
     {% if messages %}
@@ -8,9 +8,9 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-{% include 'home_banner.html' %}
+{% include 'home/home_banner.html' %}
 {% endblock banner %}
 
 {% block content %}
-    {% include 'home.html' %}
+    {% include 'home/home.html' %}
 {% endblock content %}

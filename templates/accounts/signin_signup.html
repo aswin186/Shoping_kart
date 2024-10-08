@@ -1,8 +1,5 @@
-{% extends 'base.html' %}
-
-{% block content %}
-    {% load static %}
-    <div class="account-page">
+{% load static %}
+<div class="account-page">
         <div class="container">
             <div class="row">
                 <div class="col-2">
@@ -45,19 +42,3 @@
             </div>
         </div>
 </div>
-    
-{% endblock content %}
-
-{% block scriptContent %}
-    <script src="{%  static 'js/toggle_form.js' %}"></script>
-    <script src="{%  static 'js/password_conformation.js' %}"></script>
-    {% if register %}
-        <script>
-            register()
-        </script>
-    {% else %}
-        <script>
-            login()
-        </script>
-    {% endif %}
-{% endblock scriptContent %}

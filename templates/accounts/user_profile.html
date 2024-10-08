@@ -1,0 +1,78 @@
+{% load static %}
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <p style="color: green; align-content: center">{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+<div class="container">
+        <div class="profile-card">
+            
+            <div class="profile-header">
+                <img src="{% static 'images/account_log.png' %}" alt="Profile Avatar" class="avatar">
+                <h2 id="username">{{ user_info.username }}</h2>
+            </div>
+
+            <div class="profile-info" id="profile-info">
+                <h3>Profile</h3>
+                <form id="profileForm" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="{{ user_info.user_profile.name }}" disabled>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ user_info.email }}" disabled>
+
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" value="{{ user_info.user_profile.phone }}" disabled>
+                    <div id="verifyPhone" style="display: none;">
+                        <button type="button" onclick="verifyPhone()">Verify Phone Number</button>
+                    </div>
+
+                    <button type="button" id="editBtn" onclick="editProfile()">Edit</button>
+                    <button type="submit" name="update_profile" id="updateBtn" style="display: none;">Update</button>
+                </form>
+            </div>
+            
+        </div>
+
+        <div class="address-card">
+            <div class="address-info">
+                <h3>Address</h3>
+                <form id="addressForm" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="street">Street:</label>
+                    <input type="text" id="street" name="street" value="{{ user_info.user_profile.address_profile.street }}" disabled>
+
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" value="{{ user_info.user_profile.address_profile.city }}" disabled>
+
+                    <label for="district">District:</label>
+                    <input type="text" id="district" name="district" value="{{ user_info.user_profile.address_profile.district }}" disabled>
+
+                    <label for="state">State:</label>
+                    <input type="text" id="state" name="state" value="{{ user_info.user_profile.address_profile.state }}" disabled>
+
+                    <label for="country">Country:</label>
+                    <input type="text" id="country" name="country" value="{{ user_info.user_profile.address_profile.country }}" disabled>
+                    
+                    <label for="landmark">Landmark:</label>
+                    <input type="text" id="landmark" name="landmark" value="{{ user_info.user_profile.address_profile.land_mark }}" disabled>
+
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" id="pincode" name="pincode" value="{{ user_info.user_profile.address_profile.pincode }}" disabled>
+
+                    <button type="button" id="editAddressBtn" onclick="editAddress()">Edit</button>
+                    <button type="submit" name="update_address" id="updateAddressBtn" style="display: none;">Update</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="logout-card">
+            <a class="btn" href="{% url 'logout' %}">LogOut</a>    
+        </div>
+        
+    </div>  

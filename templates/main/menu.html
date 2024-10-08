@@ -8,19 +8,14 @@
         <ul id="MenuItems">
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'list_products' %}">All Products</a></li>
-            {% if user.is_authenticated %}   
-                <li><a href="{% url 'track_orders' %}">Orders</a></li>
-            {% endif %}
             {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">LogOut</a></li>
-                    <l1>{{ user.username }}</l1>
+                <li><a href="{% url 'track_orders' %}">Orders</a></li>
+                <li><a href="{% url 'cart_details' %}">Cart</a></li>
+                <li><a href="{% url 'account_details' %}">Profile</a></li>
             {% else %}
-                <li><a href="{% url 'account_details' %}">SignIn</a></li>
+                <li><a href="{% url 'signup_in' %}">SignIn</a></li>
             {% endif %}
         </ul>
     </nav>
-    {% if user.is_authenticated %}   
-            <a href="{% url 'cart_details' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
-    {% endif %}
     <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
 </div>
