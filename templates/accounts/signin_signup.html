@@ -31,11 +31,16 @@
                             {% csrf_token %}
                             <input type="text" name="username" minlength="6" maxlength="10" required placeholder="Username">
                             <input type="email" name="email" required placeholder="Email">
+{#                            <input type="password" id="password" name="password" minlength="8" maxlength="12" required placeholder="Password">#}
+{#                            <input type="password" id="confirmPassword" name="confirmPassword" minlength="8" maxlength="12" required placeholder="Confirm Password">#}
+{#                            <p style="display: none; color: red; font-size: small;" id="error" class="error">Password not match</p>#}
+{#                            <p style="display: none; color: green; font-size: small;" id="success" class="success">Match</p>#}
+{#                            <button type="submit" style="display: none" name="register" id="registerButton" class="btn">Register</button>#}
                             <input type="password" id="password" name="password" minlength="8" maxlength="12" required placeholder="Password">
-                            <input type="password" id="confirmPassword" name="confirmPassword" minlength="8" maxlength="12" required placeholder="Confirm Password">
-                            <p style="display: none; color: red; font-size: small;" id="error" class="error">Password not match</p>
-                            <p style="display: none; color: green; font-size: small;" id="success" class="success">Match</p>
-                            <button type="submit" style="display: none" name="register" id="registerButton" class="btn">Register</button>
+{#                            <input type="password" id="confirmPassword" name="confirmPassword" minlength="8" maxlength="12" required placeholder="Confirm Password">#}
+{#                            <p style="display: none; color: red; font-size: small;" id="error" class="error">Password not match</p>#}
+{#                            <p style="display: none; color: green; font-size: small;" id="success" class="success">Match</p>#}
+                            <button type="submit" name="register" id="registerButton" class="btn">Register</button>
                         </form>
                     </div>
                 </div>
