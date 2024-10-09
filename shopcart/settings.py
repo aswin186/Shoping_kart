@@ -184,7 +184,7 @@ STORAGES = {
     'default': {
         'BACKEND': 'django.core.files.storage.FileSystemStorage',
         'OPTIONS': {
-            'location': BASE_DIR / 'media/',  # Define the location for media files
+            'location': BASE_DIR / 'media',  # Define the location for media files
         },
     },
     "staticfiles": {

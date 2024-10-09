@@ -11,7 +11,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.DecimalField(max_digits=6, decimal_places=2, default=0)
     description = models.TextField()
-    cover_image = models.ImageField(upload_to='media/products/')
+    cover_image = models.ImageField(upload_to='products/')
     priority = models.IntegerField(default=0)
     delete_status = models.IntegerField(default=live, choices=product_status)
     created_at = models.DateTimeField(auto_now_add=True)
