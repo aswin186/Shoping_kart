@@ -11,15 +11,33 @@
 
 {% block scriptContent %}
     <script src="{%  static 'js/toggle_form.js' %}"></script>
-    <script src="{%  static 'js/password_conformation.js' %}"></script>
     <script src="{%  static 'js/profile_scripts.js' %}"></script>
+    <script>
     {% if register %}
-        <script>
             register()
-        </script>
     {% else %}
-        <script>
             login()
-        </script>
     {% endif %}
+    
+
+       $( function() {
+      var availableTags = [];
+
+      $.ajax({
+        method: "GET",
+        url: "/search-list",
+        success: function (response){
+            console.log(response);
+            startAutoComplete(response);
+        }
+    });
+
+    function startAutoComplete(availableTags){
+        $( "#search-pro" ).autocomplete({
+            source: availableTags
+          });
+    }
+    } );
+       </script>
+    
 {% endblock scriptContent %}

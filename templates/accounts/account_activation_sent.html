@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    {% load static %}
+    <div>
+        <h2>Account Activation</h2>
+        <p>An activation link has been sent to your email address. Please check your email to activate your account.</p>
+    </div>
+{% endblock content %}
+
+{% block scriptContent %}
+{#    <script src="{%  static 'js/toggle_form.js' %}"></script>#}
+{#    <script src="{%  static 'js/profile_scripts.js' %}"></script>#}
+{#    <script>#}
+{#    {% if register %}#}
+{#            register()#}
+{#    {% else %}#}
+{#            login()#}
+{#    {% endif %}#}
+{#    #}
+{##}
+{#       $( function() {#}
+{#      var availableTags = [];#}
+{##}
+{#      $.ajax({#}
+{#        method: "GET",#}
+{#        url: "/search-list",#}
+{#        success: function (response){#}
+{#            console.log(response);#}
+{#            startAutoComplete(response);#}
+{#        }#}
+{#    });#}
+{##}
+{#    function startAutoComplete(availableTags){#}
+{#        $( "#search-pro" ).autocomplete({#}
+{#            source: availableTags#}
+{#          });#}
+{#    }#}
+{#    } );#}
+{#       </script>#}
+    
+{% endblock scriptContent %}

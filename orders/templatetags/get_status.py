@@ -10,5 +10,5 @@ def get_order_status(status):
     # order_delivered = 3
     # order_rejected = -1
 
-    stage = ['Cart', 'Order Processing', 'Order Packing', 'Order Delivered', 'Order Rejected']
+    stage = ['Cart', 'Order Processing', 'Order Packing', 'Order Delivered', 'Order Cancel Requested', 'Order Canceled']
     return stage[status]

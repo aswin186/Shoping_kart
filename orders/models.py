@@ -6,28 +6,34 @@ from products.models import Product
 # Create your models here.
 
 class Order(models.Model):
-    live = 1
-    delete = 0
-    status = ((live, 'Live'), (delete, 'Delete'))
+    LIVE = 1
+    DELETE = 0
+    status = ((LIVE, 'Live'), (DELETE, 'Delete'))
 
-    cart_stage = 0
-    order_confirmed = 1
-    order_processing = 2
-    order_delivered = 3
-    order_rejected = -1
-    order_status = ((order_confirmed, 'order_confirmed'),(order_processing, 'order_processing'),
-                    (order_delivered, 'order_delivered'),
-                    (order_rejected, 'order_rejected'))
+    CART_STAGE = 0
+    ORDER_CONFIRMED = 1
+    ORDER_PROCESSING = 2
+    ORDER_DELIVERED = 3
+    ORDER_CANCEL_REQUESTED = 4
+    ORDER_CANCELED = -1
+    order_status = ((ORDER_CONFIRMED, 'order_confirmed'),(ORDER_PROCESSING, 'order_processing'),
+                    (ORDER_DELIVERED, 'order_delivered'), (ORDER_CANCEL_REQUESTED, 'order_cancel_requested'),
+                    (ORDER_CANCELED, 'order_canceled'))
 
-    order_stage = models.IntegerField(choices=order_status, default=cart_stage)
+    COD = 1
+    PAY_NOW = 2
+    pay_mode = ((PAY_NOW, 'pay_now'), (COD, 'cod'))
+
+    order_stage = models.IntegerField(choices=order_status, default=CART_STAGE)
     user = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, related_name='carts', null=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    pay_status = models.IntegerField(choices=pay_mode, default=0, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    cart_status = models.IntegerField(choices=status, default=live)
+    cart_status = models.IntegerField(choices=status, default=LIVE)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.id) + "----" + str(self.pay_status)
 
 
 class OrderItem(models.Model):

@@ -1,60 +1,41 @@
-{% extends 'main/base.html' %}
 {% load get_status %}
-{% load item_price %}
+{% load payment_status %}
 
-
-{% block content %}
-    Order ID :- ODR000{{ order_obj.id }}
-    <br>
-    Ordered Date :- {{ order_obj.created_at | date:'d M Y' }}
-    <br>
-    Total Price :- {{ order_obj.total_price }}
-    <br>
-    Order Status :- {% get_order_status order_obj.order_stage %}
-    <br>
-
-
+{% if all_orders %}
     <div class="small-container cart-page">
         <table>
             <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Sub Total</th>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th></th>
             </tr>
-            {% for item in order_obj.added_items.all %}
+            {% for order in all_orders %}
             <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="{{ item.product.cover_image.url }}" alt="Product image">
-                        <div>
-                            <br>
-                            <p>{{ item.product.title }}</p>
-                            <small>Rs. {% calc_price item.quantity item.price %}</small>
-                        </div>
-                    </div>
-                </td>
-                <td>{{ item.quantity }}</td>
-                <td>{{ item.price }}</td>
+                <td> <p>ODR000{{ order.id }}</p> </td>
+                <td>{{ order.created_at | date:'d M Y' }}</td>
+                <td><div>{{ order.total_price }}</div><div>{% get_payment_status order.pay_status %}</div></td>
+                <td>{% get_order_status order.order_stage %}</td>
+                <td><a class="btn" href="{% url 'order_details' order.id %}">View</a></td>
             </tr>
             {% endfor %}
         </table>
-        <div class="total-price">
-            <table>
-                <tr>
-                    <td>Total</td>
-                    <td>{{ order_obj.total_price }}</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <form method="post" action="" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <input type="hidden" name="total" value="cancel">
-                        <td><button type="submit" class="btn">Cancel order</button></td>
-                    </form>
-                </tr>
-            </table>
+    
+    
+        <div class="page-btn" style="align-items: center">
+                {% if all_orders.has_previous %}
+                    <a href="?page={{ all_orders.previous_page_number }}"><span><<<</span></a>
+                {% endif %}
+                {% for i in all_orders.paginator.page_range %}
+                    <a href="?page={{ i }}"><span>{{ i }}</span></a>
+                {% endfor %}
+                {% if all_orders.has_next %}
+                    <a href="?page={{ all_orders.next_page_number }}"><span>>>></span></a>
+                {% endif %}
         </div>
     </div>
+{% else %}
+    <h1>No orders</h1>
+{% endif %}
 
-
-{% endblock content %}

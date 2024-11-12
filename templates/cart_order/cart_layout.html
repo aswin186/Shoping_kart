@@ -19,5 +19,66 @@
 {% endblock content %}
 
 {% block scriptContent %}
-    <h1>cart scripts</h1>
+    <script src="https://www.paypal.com/sdk/js?client-id=AWOMDhOosiTWoFyMTBwsVWcPKt-LdCZOPP4rv7cbRTOhiU3UKE_Pl68LaRFOrmwqVCcf3K9F22yfcsHr&currency=USD"></script>
+
+    <script>
+    paypal.Buttons({
+        onClick: function (data, actions){
+            var total = $("[name='ptotal']").val();
+            var pay_status = $("[name='pPaymentMethod']").val();
+
+            if(total === "" || pay_status === ""){
+                alert("Not matching");
+                return false;
+            }
+            else {
+                return true;
+            }
+        },
+
+        createOrder: function (data, actions){
+            return actions.order.create({
+                purchase_units: [{"amount":{"currency_code": "USD", "value": "1.00"}}]
+            })
+        },
+
+        onApprove: function (data, actions){
+            return actions.order.capture().then(function(Detail){
+                console.log(Detail);
+                var transaction = Detail.purchase_units[0].payments.captures[0];
+                alert('Transaction '+ transaction.status +": " + transaction.id + '\n\nGo and track you orders');
+                //if(Detail.status === "COMPLETED"){
+                 //   window.location.href = 'order/track_orders'
+                //}
+
+                //Creating order on succes payments
+                var total = $("[name='ptotal']").val();
+                var pay_status = $("[name='pPaymentMethod']").val();
+                var token = $("[name='csrfmiddlewaretoken']").val();
+
+                data = {
+                    "total": total,
+                    "pay_status": pay_status,
+                    csrfmiddlewaretoken: token,
+                }
+                $.ajax({
+                    method: "POST",
+                    {#url: "/conform_with_paypal",#}
+                    url: "conform_with_paypal",
+                    data: data,
+                });
+                
+                if(Detail.status === "COMPLETED"){
+                    window.location.href = '/order/track_ordes'
+               }
+
+            });
+        },
+
+        {#onError: function(err) {#}
+        {#        console.error("An error occurred during the PayPal transaction:", err);#}
+        {#        alert("An error occurred while processing your payment. Please try again.");#}
+        {#    }#}
+    }).render("#paypal-button-container");
+    </script>
 {% endblock scriptContent %}

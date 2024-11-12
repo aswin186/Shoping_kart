@@ -5,6 +5,8 @@
         {% for message in messages %}
             {% if message.tags == 'success' %}
                 <p style="color: green; align-content: center">{{ message }}</p>
+            {% else %}
+                <p style="color: red; align-content: center">{{ message }}</p>
             {% endif %}
         {% endfor %}
     {% endif %}
@@ -14,3 +16,28 @@
 {% block content %}
     {% include 'home/home.html' %}
 {% endblock content %}
+
+{% block scriptContent %}
+    
+    <script>
+       $( function() {
+      var availableTags = [];
+
+      $.ajax({
+        method: "GET",
+        url: "/search-list",
+        success: function (response){
+            console.log(response);
+            startAutoComplete(response);
+        }
+    });
+
+    function startAutoComplete(availableTags){
+        $( "#search-pro" ).autocomplete({
+            source: availableTags
+          });
+    }
+    } );
+       </script>
+    
+{% endblock scriptContent %}

@@ -25,7 +25,7 @@
         <h2 class="title">Featured Products</h2>
         <div class="row">
             {% for fp in featured_products %}
-            <div class="col-4">
+            <div class="col-3">
                 <a href="{% url 'product_details' fp.id %}"><img style="height: 300px;" src="{{fp.cover_image.url}}"></a>
                 <h3>{{ fp.title }}</h3>
                 <del>Rs. {{ fp.price }}</del>
@@ -36,31 +36,13 @@
         <h2 class="title">Latest Products</h2>
         <div class="row">
             {% for lp in latest_products %}
-            <div class="col-4">
+            <div class="col-3">
                 <a href="{% url 'product_details' lp.id %}"><img style="height: 300px;" src="{{lp.cover_image.url}}"></a>
                 <h3>{{ lp.title }}</h3>
                 <del>Rs. {{ lp.price }}</del>
                 <h3>Rs. {% calc_discount lp.price lp.discount %}</h3>
             </div>
             {% endfor %}
-        </div>
-    </div>
-
-    <!-- Offer -->
-    <div class="offer">
-        <div class="small-container">
-            <div class="row">
-                <div class="col-2">
-                    <img src="{% static 'images/exclusive.png' %}" class="offer-img">
-                </div>
-                <div class="col-2">
-                    <p>Exclusively Available on RedStore</p>
-                    <h1>Smart Band 4</h1>
-                    <small>The Mi Smart Band 4 fearures a 39.9%larger (than Mi Band 3) AMOLED color full-touch display
-                        with adjustable brightness, so everything is clear as can be.<br></small>
-                    <a href="{% url 'list_products' %}" class="btn">Buy Now &#8594;</a>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -119,20 +101,17 @@
     <div class="brands">
         <div class="small-container">
             <div class="row">
-                <div class="col-5">
+                <div class="col-3">
                     <img src="{% static 'images/logo-godrej.png' %}">
                 </div>
-                <div class="col-5">
+                <div class="col-3">
                     <img src="{% static 'images/logo-oppo.png' %}">
                 </div>
-                <div class="col-5">
+                <div class="col-3">
                     <img src="{% static 'images/logo-coca-cola.png' %}">
                 </div>
-                <div class="col-5">
+                <div class="col-3">
                     <img src="{% static 'images/logo-paypal.png' %}">
-                </div>
-                <div class="col-5">
-                    <img src="{% static 'images/logo-philips.png' %}">
                 </div>
             </div>
         </div>

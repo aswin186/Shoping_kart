@@ -25,12 +25,12 @@
 
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" value="{{ user_info.email }}" disabled>
+{#                    <div id="verifyEmail" style="display: none;">#}
+{#                        <button class="btn btn-warning" type="button" onclick="verifyEmail()">Verify Email</button>#}
+{#                    </div>#}
 
                     <label for="phone">Phone:</label>
                     <input type="tel" id="phone" name="phone" value="{{ user_info.user_profile.phone }}" disabled>
-                    <div id="verifyPhone" style="display: none;">
-                        <button type="button" onclick="verifyPhone()">Verify Phone Number</button>
-                    </div>
 
                     <button type="button" id="editBtn" onclick="editProfile()">Edit</button>
                     <button type="submit" name="update_profile" id="updateBtn" style="display: none;">Update</button>
@@ -72,7 +72,7 @@
 
         </div>
         <div class="logout-card">
-            <a class="btn" href="{% url 'logout' %}">LogOut</a>    
+            <a class="button btn btn-danger" href="{% url 'logout' %}">LogOut</a>    
         </div>
         
     </div>  

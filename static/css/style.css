@@ -606,3 +606,15 @@ button:hover {
     background-color: #e68900;
 }
 
+/*custom*/
+.search-bar {
+    width: 50%;
+    height: 1px;
+}
+
+#empty-cart h1 a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -5,18 +5,32 @@ function editProfile() {
     document.getElementById("phone").disabled = false;
 
     // Show "Verify Phone" button
-    document.getElementById("verifyPhone").style.display = "block";
+    // document.getElementById("verifyPhone").style.display = "block";
+    // document.getElementById("verifyEmail").style.display = "block";
 
     // Hide Edit button, show Update button
     document.getElementById("editBtn").style.display = "none";
     document.getElementById("updateBtn").style.display = "inline-block";
 }
 
-function verifyPhone() {
-    const phone = document.getElementById("phone").value;
-    // Add your phone verification logic here
-    alert("Phone verification process started for: " + phone);
-}
+// function verifyPhone() {
+//     const phone = document.getElementById("phone").value;
+//     // Add your phone verification logic here
+//     alert("Phone verification process started for: " + phone);
+// }
+
+// function verifyEmail() {
+//     const email = document.getElementById("email").value;
+//
+//     alert("Email verification process started for: " + email);
+// }
+
+document.getElementById('email').addEventListener('change', function() {
+        // document.getElementById('categoryForm').submit();
+    const email = document.getElementById("email").value;
+
+    alert("Email verification process started for: " + email);
+    });
 
 function editAddress() {
     // Enable address fields for editing

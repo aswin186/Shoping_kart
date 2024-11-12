@@ -30,10 +30,11 @@ load_dotenv(env_path)
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'shopingkart.pythonanywhere.com']
 CSRF_TRUSTED_ORIGINS = ['https://shopingkart.pythonanywhere.com/']
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 
 # Application definition
@@ -156,9 +157,6 @@ STATICFILES_DIRS = [
 ]
 
 # Media files (Images, Files)
-#
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

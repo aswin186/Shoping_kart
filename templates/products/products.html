@@ -9,19 +9,26 @@
 {% block content %}
     <div class="small-container">
         <div class="row row-2">
+        {% if category_name %}
+            <h2>{{ category_name }}</h2>
+        {% else %}
             <h2>All Products</h2>
-            <select>
-                <option>Default Sort</option>
-                <option>Sort By Price</option>
-                <option>Sort By Popularity</option>
-                <option>Sort By Rating</option>
-                <option>Sort By Sale</option>
+        {% endif %}
+        <form action="{% url 'apply_category' %}" method="POST" id="categoryForm">
+        {% csrf_token %}
+            <select name="filter" id="categorySelect">
+                <option value="">Select Category</option>
+                <option value="All">All Products</option>
+                {% for category in all_categories %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
             </select>
+        </form>
         </div>
 {#            {% calc_discount_price p.product_price p.discount_rate %}#}
         <div class="row">
             {% for product in all_products %}
-            <div class="col-4">
+            <div class="col-3">
                 <a href="{% url 'product_details' product.id %}"><img style="height: 300px;" src="{{product.cover_image.url}}"></a>
                 <h3>{{ product.title }}</h3>
                 <p>{{ product.description }}</p>
@@ -43,3 +50,30 @@
         </div>
     </div>
 {% endblock content %}
+
+{% block scriptContent %}
+	<script>
+    $( function() {
+      var availableTags = [];
+
+      $.ajax({
+        method: "GET",
+        url: "/search-list",
+        success: function (response){
+            console.log(response);
+            startAutoComplete(response);
+        }
+    });
+
+    function startAutoComplete(availableTags){
+        $( "#search-pro" ).autocomplete({
+            source: availableTags
+          });
+    }
+    } );
+    
+    document.getElementById('categorySelect').addEventListener('change', function() {
+        document.getElementById('categoryForm').submit();
+    });
+</script>
+{% endblock scriptContent %}

@@ -4,8 +4,27 @@
     <div class="logo">
         <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="125px"></a>
     </div>
+
+<div>
+
+
+
+</div>
     <nav>
         <ul id="MenuItems">
+            <li>
+                <div>
+    <div class="input-group mb-3">
+        <form action="{% url 'search_product' %}" method="POST">
+            <div class="input-group-prepend">
+                {% csrf_token %}
+                <input id="search-pro" required name="title" type="search" class="form-control" placeholder="Search..">
+                <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+            </li>
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'list_products' %}">All Products</a></li>
             {% if user.is_authenticated %}

@@ -44,19 +44,35 @@
                     <td>Rs. {% calc_Total cart_obj %}</td>
                 </tr>
                 <tr>
-                    <td></td>
                     <form method="post" action="{% url 'conform_order' %}" enctype="multipart/form-data">
                         {% csrf_token %}
+                        <td>
+                        </td>
                         <input type="hidden" name="total" value="{% calc_Total cart_obj %}">
+                        <input type="hidden" name="paymentMethod" value="COD" required>
                         <td><button type="submit" class="btn">Conform order</button></td>    
                     </form>
+                </tr>
+                <tr>
+{#                    <form method="post" action="{% url 'conform_order' %}" enctype="multipart/form-data">#}
+{#                        {% csrf_token %}#}
+                    <td>
+                            {% csrf_token %}
+                        <input type="hidden" name="ptotal" value="{% calc_Total cart_obj %}">
+                        <input type="hidden" name="pPaymentMethod" value="PAY_NOW" required>
+                    </td>
+                        <td><div id="paypal-button-container"></div></td>    
+{#                    </form>#}
+{#                        <td>#}
+{#                        </td>#}
+{#                        <td><div id="paypal-button-container"></div></td>#}
                 </tr>
             </table>
         </div>
     </div>
     
 {% else %}
-    <div class="col-2">
+    <div class="empty-cart">
         <h2>You Cart is Empty!.............</h2>
         <a href="{% url 'list_products' %}"  class="btn">Feed Your Cart</a>
     </div>
