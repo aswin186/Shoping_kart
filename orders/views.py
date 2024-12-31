@@ -115,6 +115,9 @@ def conform_order(request):
                     item_name.append(item.product.title)
                     item_sub_price.append(int(item.price))
                     item_quantity.append(item.quantity)
+                    product_obj = Product.objects.get(id=item.product.id)
+                    product_obj.available_quantity = product_obj.available_quantity - item.quantity
+                    product_obj.save()
 
                 print(item_name, item_sub_price, item_quantity)
 
@@ -228,6 +231,9 @@ def confirm_order_with_paypal(request):
                     item_name.append(item.product.title)
                     item_sub_price.append(int(item.price))
                     item_quantity.append(item.quantity)
+                    product_obj = Product.objects.get(id=item.product.id)
+                    product_obj.available_quantity = product_obj.available_quantity - item.quantity
+                    product_obj.save()
 
                 print(item_name, item_sub_price, item_quantity)
 

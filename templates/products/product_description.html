@@ -10,6 +10,7 @@
                 <h4>{{ product.description }}</h4>
                 <del>Rs. {{ product.price }}</del>
                 <h3>Rs. {% calc_discount product.price product.discount %}</h3>
+                <h5>Qty. {{ product.available_quantity }}</h5>
                 <form method="post" action="{% url 'add_to_cart' %}" enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" value="{{ product.id }}" name="product_id">

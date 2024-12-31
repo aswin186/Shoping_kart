@@ -34,6 +34,7 @@
                 <p>{{ product.description }}</p>
                 <del>Rs. {{ product.price }}</del>
                 <h3>Rs. {% calc_discount product.price product.discount %}</h3>
+                <h5>Qty. {{ product.available_quantity }}</h5>
             </div>
                 {% endfor %}
         </div>

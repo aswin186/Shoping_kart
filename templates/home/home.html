@@ -30,6 +30,7 @@
                 <h3>{{ fp.title }}</h3>
                 <del>Rs. {{ fp.price }}</del>
                 <h3>Rs. {% calc_discount fp.price fp.discount %}</h3>
+                <h5>Qty. {{ fp.available_quantity }}</h5>
             </div>
             {% endfor %}
         </div>
@@ -41,6 +42,7 @@
                 <h3>{{ lp.title }}</h3>
                 <del>Rs. {{ lp.price }}</del>
                 <h3>Rs. {% calc_discount lp.price lp.discount %}</h3>
+                <h5>Qty. {{ lp.available_quantity }}</h5>
             </div>
             {% endfor %}
         </div>
