@@ -21,6 +21,7 @@ class Product(models.Model):
     delete_status = models.IntegerField(default=live, choices=product_status)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    available_quantity = models.IntegerField(default=0)
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', null=True)
 
